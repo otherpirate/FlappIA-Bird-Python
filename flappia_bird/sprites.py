@@ -13,16 +13,16 @@ class Sprite(object):
 
     LOADED_IMAGES = OrderedDict()
 
-    def __init__(self, width, height, image):
+    def __init__(self, width, height, name):
         self.width = width
         self.height = height
-        self.image = image
-        if self.image not in self.LOADED_IMAGES:
-            self.LOADED_IMAGES[self.image] = pygame.image.load('./images/{}'.format(image))
+        self.name = name
+        if self.name not in self.LOADED_IMAGES:
+            self.LOADED_IMAGES[self.name] = pygame.image.load('./images/{}'.format(self.name))
 
     @property
     def drawer(self):
-        return self.LOADED_IMAGES[self.image]
+        return self.LOADED_IMAGES[self.name]
 
 
 class Text(object):

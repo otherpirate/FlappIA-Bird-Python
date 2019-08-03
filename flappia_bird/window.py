@@ -18,15 +18,15 @@ class Window(object):
         self.content = {}
 
     def prepare(self, sprite, quantity, y_pos):
-        self.content[sprite.image] = []
+        self.content[sprite.name] = []
         for i in range(quantity):
             obj = WindowObject(sprite, i*sprite.width, y_pos)
             self.add(obj)
 
     def add(self, obj):
-        if obj.sprite.image not in self.content:
-            self.content[obj.sprite.image] = []
-        self.content[obj.sprite.image].append(obj)
+        if obj.sprite.name not in self.content:
+            self.content[obj.sprite.name] = []
+        self.content[obj.sprite.name].append(obj)
 
     def draw(self):
         self.screen.fill(BLACK_COLOR)

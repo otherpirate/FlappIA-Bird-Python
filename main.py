@@ -5,8 +5,8 @@ from flappia_bird.sprites import SpriteInitializer
 from flappia_bird.window import Window
 
 
-WINDOW_WIDTH = 640
-WINDOW_HEIGHT = 480
+WINDOW_WIDTH = 800
+WINDOW_HEIGHT = 600
 WINDOW_SIZE = [WINDOW_WIDTH, WINDOW_HEIGHT]
 
 GAME_MODE_EVOLUTION = 0
@@ -19,13 +19,30 @@ QUANTITY_BUILD = 3
 QUANTITY_TREE = 3
 QUANTITY_FLOOR = 10
 
+SPEED = 1.0
+
 
 class Game(object):
-    def __init__(self, window, birds):
+    def __init__(self, window, sprites, birds, speed):
         self.window = window
+        self.sprites = sprites
         self.birds = birds
         self.record = 0
         self.generation = 0
+        self.speed = speed
+
+    def background_movement(self):
+        self.movement(self.sprites.cloud.name, 45)
+        self.movement(self.sprites.build.name, 15)
+        self.movement(self.sprites.tree.name, 5)
+        self.movement(self.sprites.floor.name, SPEED)
+
+    def movement(self, name, step):
+        for obj in self.window.content[name]:
+            obj.x_pos -= self.speed/step
+            if obj.x_pos + obj.sprite.width >= 0:
+                continue
+            obj.x_pos += (len(self.window.content[name]) - 1) * obj.sprite.width
 
 
 def initial_config():
@@ -55,7 +72,7 @@ def initial_config():
         # load_network()  # TODO too far
         pass
 
-    return Game(window, birds)
+    return Game(window, sprites, birds, SPEED)
 
 
 def main():
@@ -72,6 +89,7 @@ def main():
             break
 
         game.window.draw()
+        game.background_movement()
         clock.tick(50)
 
 
