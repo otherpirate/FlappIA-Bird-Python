@@ -1,31 +1,34 @@
-from flappia_bird.rna import RNA
+from random import randint
 from flappia_bird.window import WindowObject
 
-STATE_ALIVE = 1
-STATE_DEAD = 2
-BIRD_BRAIN_LAYERS = 1
-BIRD_BRAIN_INPUT = 2
-BIRD_BRAIN_HIDE = 2
-BIRD_BRAIN_OUTPUT = 1
+
+PIPE_STEP = 275
+PIPE_AMPLITUDE = 150
+PIPE_OPENNESS = 100
+DOWN_DIRECTION = 0
+UP_DIRECTION = 1
+MINIMAL_PIPE_SIZE = 35
+INITIAL_X_PIPE = PIPE_STEP + 200
 
 
-class Bird(WindowObject):
-    def __init__(self, sprite, x_pos, y_pos):
-        super(Bird, self).__init__(sprite, x_pos, y_pos)
-        self.speed = 0
-        self.angle = 0
-        self.state = STATE_ALIVE
-        self.fitness = 0.0
-        self.brain = RNA(BIRD_BRAIN_LAYERS, BIRD_BRAIN_INPUT, BIRD_BRAIN_HIDE, BIRD_BRAIN_OUTPUT)
-        self.dna = []
+class Pipe(WindowObject):
+    def __init__(self, sprite, x_pos, y_pos, direction):
+        super(Pipe, self).__init__(sprite, x_pos, y_pos)
+        self.amplitude = PIPE_AMPLITUDE
+        self.direction = direction
 
 
-def build_birds(quantity, bird_sprites, x_pos, y_pos):
-    birds = []
+def build_pipes(quantity, sprite_pipe_upper, sprite_pipe_lower, base_height, max_height):
+    current_x = INITIAL_X_PIPE
+    pipes = []
+    max_y = max_height - base_height - MINIMAL_PIPE_SIZE - PIPE_OPENNESS
     for i in range(quantity):
-        bird_sprite = bird_sprites.pop(0)
-        bird_sprites.append(bird_sprite)
-        bird = Bird(bird_sprite, x_pos, y_pos)
-        birds.append(bird)
+        y = randint(MINIMAL_PIPE_SIZE, max_y)
+        direction = randint(DOWN_DIRECTION, UP_DIRECTION)
+        upper_pipe = Pipe(sprite_pipe_upper, current_x, y - sprite_pipe_upper.height, direction)
+        lower_pipe = Pipe(sprite_pipe_lower, current_x, y + PIPE_OPENNESS, direction)
+        pipes.append(upper_pipe)
+        pipes.append(lower_pipe)
+        current_x += PIPE_STEP
 
-    return birds
+    return pipes

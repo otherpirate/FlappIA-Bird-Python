@@ -42,7 +42,8 @@ class SpriteInitializer(object):
         self.build = Sprite(959, 54, 'predios2.png')
         self.tree = Sprite(959, 52, 'arvores.png')
         self.floor = Sprite(209, 75, 'chao.png')
-        self.pipe = Sprite(86, 836, 'cano.bmp')
+        self.upper_pipe = Sprite(86, 836, 'canoup.bmp')
+        self.lower_pipe = Sprite(86, 836, 'canodown.bmp')
         self.parachute = Sprite(50, 50, 'paraquedas.png')
 
         widths = [54, 55, 58]
