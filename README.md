@@ -5,6 +5,7 @@ Implementation of https://github.com/JVictorDias/FlappIA-Bird in Python
 # TODO
 ## Interface
 - [x] Load and draw sprites
+- [ ] Screen texts/messages
 - [ ] Screen movement
 - [ ] Pipes movivment
 - [ ] Bird movivment
