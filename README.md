@@ -5,13 +5,14 @@ Implementation of https://github.com/JVictorDias/FlappIA-Bird in Python
 # TODO
 ## Interface
 - [x] Load and draw sprites
-- [ ] Screen texts/messages
-- [ ] Screen movement
-- [ ] Pipes movivment
-- [ ] Bird movivment
+- [x] Screen movement
+- [x] Pipes movement X
+- [X] Pipes movement Y
+- [ ] Bird movement
 - [ ] Bird gravity
-- [ ] Draw resume
 - [ ] Check Colision
+- [ ] Screen texts/messages
+- [ ] Draw resume
 
 ## IA
 - [ ] Neural network
