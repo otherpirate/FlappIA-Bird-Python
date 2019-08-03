@@ -1,6 +1,6 @@
 import pygame
 
-BLACK_COLOR = 20, 20, 40
+BLACK_COLOR = (20, 20, 40)
 
 
 class WindowObject(object):
