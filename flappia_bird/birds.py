@@ -10,8 +10,8 @@ BIRD_BRAIN_OUTPUT = 1
 
 
 class Bird(WindowObject):
-    def __init__(self, sprite):
-        super(Bird, self).__init__(sprite, 0, 0)
+    def __init__(self, sprite, x_pos, y_pos):
+        super(Bird, self).__init__(sprite, x_pos, y_pos)
         self.speed = 0
         self.angle = 0
         self.state = STATE_ALIVE
@@ -20,12 +20,12 @@ class Bird(WindowObject):
         self.dna = []
 
 
-def build_birds(quantity, bird_sprites):
+def build_birds(quantity, bird_sprites, x_pos, y_pos):
     birds = []
     for i in range(quantity):
         bird_sprite = bird_sprites.pop(0)
         bird_sprites.append(bird_sprite)
-        bird = Bird(bird_sprite)
+        bird = Bird(bird_sprite, x_pos, y_pos)
         birds.append(bird)
 
     return birds

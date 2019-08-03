@@ -4,6 +4,10 @@ import pygame
 QUANTITY_COLOR_BIRDS = 6
 QUANTITY_SPRITES_BIRDS = 3
 
+FONT_BLACK = (0, 0, 0)
+FONT_RED = (255, 0, 0)
+FONT_BLUE = (0, 0, 255)
+
 
 class Sprite(object):
 
@@ -19,6 +23,16 @@ class Sprite(object):
     @property
     def drawer(self):
         return self.LOADED_IMAGES[self.image]
+
+
+class Text(object):
+    def __init__(self, message, color, size):
+        font = pygame.font.Font('freesansbold.ttf', size)
+        self.text = font.render(message, True, color)
+
+    @property
+    def drawer(self):
+        return self.text
 
 
 class SpriteInitializer(object):
