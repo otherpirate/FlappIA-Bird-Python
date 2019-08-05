@@ -1,8 +1,10 @@
 from flappia_bird.rna import RNA
 from flappia_bird.window import WindowObject
 
-STATE_ALIVE = 1
-STATE_DEAD = 2
+STATE_ALIVE = 0
+STATE_JUMPING = 1
+STATE_PARACHUTE = 2
+STATE_DEAD = 3
 BIRD_BRAIN_LAYERS = 1
 BIRD_BRAIN_INPUT = 2
 BIRD_BRAIN_HIDE = 2
@@ -18,6 +20,18 @@ class Bird(WindowObject):
         self.fitness = 0.0
         self.brain = RNA(BIRD_BRAIN_LAYERS, BIRD_BRAIN_INPUT, BIRD_BRAIN_HIDE, BIRD_BRAIN_OUTPUT)
         self.dna = []
+        self.vertical_speed = 0.0
+
+    @property
+    def using_parachute(self):
+        return self.state == STATE_PARACHUTE
+
+    @property
+    def is_dead(self):
+        return self.state == STATE_DEAD
+
+    def kill(self):
+        self.state = STATE_DEAD
 
 
 def build_birds(quantity, bird_sprites, x_pos, y_pos):

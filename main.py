@@ -31,7 +31,7 @@ def initial_config():
     screen = pygame.display.set_mode(WINDOW_SIZE)
 
     if GAME_MODE == GAME_MODE_EVOLUTION:
-        population_size = 2000
+        population_size = 10
     elif GAME_MODE == GAME_MODE_TEST:
         population_size = 1
     elif GAME_MODE == GAME_MODE_CHALLENGE:
@@ -43,15 +43,15 @@ def initial_config():
     window.prepare(sprites.build, QUANTITY_BUILD, WINDOW_HEIGHT - 175)
     window.prepare(sprites.tree, QUANTITY_TREE, WINDOW_HEIGHT - 125)
 
-    birds = build_birds(population_size, sprites.birds, 50, WINDOW_HEIGHT - 200)
-    for bird in birds:
-        window.add(bird)
-
     pipes = build_pipes(QUANTITY_PIPES, sprites.upper_pipe, sprites.lower_pipe, sprites.floor.height, WINDOW_HEIGHT)
     for pipe in pipes:
         window.add(pipe)
 
     window.prepare(sprites.floor, QUANTITY_FLOOR, WINDOW_HEIGHT - sprites.floor.height)
+
+    birds = build_birds(population_size, sprites.birds, 50, WINDOW_HEIGHT - 200)
+    for bird in birds:
+        window.add(bird)
 
     if GAME_MODE == GAME_MODE_CHALLENGE:
         # load_network()  # TODO too far
@@ -75,6 +75,8 @@ def main():
 
         game.window.draw()
         game.background_movement()
+        game.bird_movement()
+        game.apply_gravity()
         clock.tick(50)
 
 

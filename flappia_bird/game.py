@@ -42,3 +42,27 @@ class Game(object):
                 lower[i] = new_lower
             upper[i].vertical_movement()
             lower[i].vertical_movement()
+
+    def bird_movement(self):
+        for bird in self.birds:
+            if bird.is_dead:
+                if bird.sprite.width + 5 >= bird.x_pos:
+                    bird.x_pos -= self.speed
+
+                if bird.y_pos >= 400:
+                    bird.vertical_speed = 0
+                    bird.y_pos = 400
+                else:
+                    bird.y_pos += bird.vertical_speed
+            else:
+                bird.fitness += 2.0
+                bird.y_pos += bird.vertical_speed
+
+                if bird.y_pos < 75 or bird.y_pos >= 400:
+                    bird.kill()
+
+    def apply_gravity(self):
+        for bird in self.birds:
+            if bird.using_parachute:
+                continue
+            bird.vertical_speed += 0.08
