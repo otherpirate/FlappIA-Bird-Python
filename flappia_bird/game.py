@@ -49,16 +49,25 @@ class Game(object):
                 if bird.sprite.width + 5 >= bird.x_pos:
                     bird.x_pos -= self.speed
 
-                if bird.y_pos >= 400:
+                if bird.y_pos >= 350:
                     bird.vertical_speed = 0
-                    bird.y_pos = 400
+                    bird.y_pos = 349
                 else:
                     bird.y_pos += bird.vertical_speed
             else:
                 bird.fitness += 2.0
                 bird.y_pos += bird.vertical_speed
 
-                if bird.y_pos < 75 or bird.y_pos >= 400:
+                if bird.y_pos < 75 or bird.y_pos >= 350:
+                    bird.kill()
+
+    def check_collisions(self):
+        for bird in self.birds:
+            if bird.is_dead:
+                continue
+
+            for pipe in self.pipes:
+                if pipe.collision_with(bird):
                     bird.kill()
 
     def apply_gravity(self):

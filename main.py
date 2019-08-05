@@ -77,6 +77,7 @@ def main():
         game.background_movement()
         game.bird_movement()
         game.apply_gravity()
+        game.check_collisions()
         clock.tick(50)
 
 

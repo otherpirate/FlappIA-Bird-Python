@@ -35,6 +35,17 @@ class Pipe(WindowObject):
             self.y_pos += VERTICAL_SPEED
         self.amplitude += VERTICAL_SPEED
 
+    def collision_with(self, bird):
+        if bird.x_pos + bird.sprite.width <= self.x_pos:
+            return False
+        if bird.x_pos >= self.x_pos + self.sprite.width:
+            return False
+        if bird.y_pos + bird.sprite.height <= self.y_pos:
+            return False
+        if bird.y_pos >= self.y_pos + self.sprite.height:
+            return False
+        return True
+
 
 def build_pipes(quantity, sprite_pipe_upper, sprite_pipe_lower, base_height, max_height):
     current_x = INITIAL_X_PIPE
