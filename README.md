@@ -9,8 +9,8 @@ Implementation of https://github.com/JVictorDias/FlappIA-Bird in Python
 - [x] Pipes movement X
 - [X] Pipes movement Y
 - [ ] Bird movement
-- [ ] Bird gravity
-- [ ] Check Colision
+- [x] Bird gravity
+- [x] Check Colision
 - [ ] Screen texts/messages
 - [ ] Draw resume
 
