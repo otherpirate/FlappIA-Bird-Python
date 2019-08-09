@@ -17,12 +17,13 @@ class Pipe(WindowObject):
         super(Pipe, self).__init__(sprite, x_pos, y_pos)
         self.amplitude = 0
         self.direction = direction
+        self.vertical_speed = VERTICAL_SPEED
 
     def going_up(self):
         return self.direction == UP_DIRECTION
 
     def vertical_movement(self):
-        if self.amplitude + VERTICAL_SPEED >= MAX_AMPLITUDE:
+        if self.amplitude + self.vertical_speed >= MAX_AMPLITUDE:
             if self.going_up():
                 self.direction = DOWN_DIRECTION
             else:
@@ -30,10 +31,10 @@ class Pipe(WindowObject):
             self.amplitude *= -1
 
         if self.going_up():
-            self.y_pos -= VERTICAL_SPEED
+            self.y_pos -= self.vertical_speed
         else:
-            self.y_pos += VERTICAL_SPEED
-        self.amplitude += VERTICAL_SPEED
+            self.y_pos += self.vertical_speed
+        self.amplitude += self.vertical_speed
 
     def collision_with(self, bird):
         if bird.x_pos + bird.sprite.width <= self.x_pos:

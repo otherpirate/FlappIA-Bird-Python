@@ -61,6 +61,36 @@ class Game(object):
                 if bird.y_pos < 75 or bird.y_pos >= 350:
                     bird.kill()
 
+    @property
+    def next_pipe(self):
+        index = None
+        closer_pipe = None
+        for i, pipe in enumerate(self.pipes):
+            if not index or closer_pipe.x_pos > pipe.x_pos:
+                closer_pipe = pipe
+                index = i
+        upper = self.window.content.get(self.sprites.upper_pipe.name, [])[index]
+        lower = self.window.content.get(self.sprites.lower_pipe.name, [])[index]
+        return upper, lower
+
+    def bird_choose(self):
+        next_upper, next_lower = self.next_pipe
+        for bird in self.birds:
+            if bird.is_dead:
+                continue
+
+            rna_inputs= []
+            rna_inputs.append((next_upper.x_pos + (next_upper.sprite.width/2.0)) - bird.x_pos)
+            rna_inputs.append((((next_lower.y_pos + next_lower.sprite.height) + next_upper.y_pos)/2.0) - bird.y_pos)
+            rna_inputs.append(next_upper.vertical_speed)
+            rna_inputs.append(next_upper.y_pos - (next_lower.y_pos + next_lower.sprite.height))
+
+            bird.brain.input_layer.replace_values(rna_inputs)
+            bird.brain.calculate_output()
+
+            #RNA_CopiarDaSaida(Passaro[i].Cerebro, Saida);
+
+
     def check_collisions(self):
         for bird in self.birds:
             if bird.is_dead:

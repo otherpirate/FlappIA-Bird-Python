@@ -78,6 +78,8 @@ def main():
         game.bird_movement()
         game.apply_gravity()
         game.check_collisions()
+        game.bird_choose()
+
         clock.tick(50)
 
 
