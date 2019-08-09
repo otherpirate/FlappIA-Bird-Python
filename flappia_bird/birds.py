@@ -33,6 +33,10 @@ class Bird(WindowObject):
     def kill(self):
         self.state = STATE_DEAD
 
+    def jump(self):
+        self.vertical_speed = -3.5
+        self.state = STATE_JUMPING
+
 
 def build_birds(quantity, bird_sprites, x_pos, y_pos):
     birds = []

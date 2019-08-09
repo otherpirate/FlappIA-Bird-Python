@@ -79,17 +79,17 @@ class Game(object):
             if bird.is_dead:
                 continue
 
-            rna_inputs= []
-            rna_inputs.append((next_upper.x_pos + (next_upper.sprite.width/2.0)) - bird.x_pos)
-            rna_inputs.append((((next_lower.y_pos + next_lower.sprite.height) + next_upper.y_pos)/2.0) - bird.y_pos)
-            rna_inputs.append(next_upper.vertical_speed)
-            rna_inputs.append(next_upper.y_pos - (next_lower.y_pos + next_lower.sprite.height))
-
+            rna_inputs = [
+                (next_upper.x_pos + (next_upper.sprite.width/2.0)) - bird.x_pos,
+                (((next_lower.y_pos + next_lower.sprite.height) + next_upper.y_pos)/2.0) - bird.y_pos,
+                next_upper.vertical_speed,
+                next_upper.y_pos - (next_lower.y_pos + next_lower.sprite.height),
+            ]
             bird.brain.input_layer.replace_values(rna_inputs)
             bird.brain.calculate_output()
 
-            #RNA_CopiarDaSaida(Passaro[i].Cerebro, Saida);
-
+            if bird.brain.should_jump:
+                bird.jump()
 
     def check_collisions(self):
         for bird in self.birds:

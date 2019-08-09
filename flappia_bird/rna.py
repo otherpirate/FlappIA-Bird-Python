@@ -74,6 +74,10 @@ class RNA(object):
                 total += self.hidden_layers[k-1].neurons[j].output * neuron.weights[j]
             neuron.output = self.limit_sum_value(total)
 
+    @property
+    def should_jump(self):
+        return self.output_layer.neurons[0].output > 0.0
+
     @staticmethod
     def limit_sum_value(value):
         if value < 0:
