@@ -31,7 +31,7 @@ def initial_config():
     screen = pygame.display.set_mode(WINDOW_SIZE)
 
     if GAME_MODE == GAME_MODE_EVOLUTION:
-        population_size = 10
+        population_size = 2000
     elif GAME_MODE == GAME_MODE_TEST:
         population_size = 1
     elif GAME_MODE == GAME_MODE_CHALLENGE:
